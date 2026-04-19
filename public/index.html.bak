@@ -445,7 +445,7 @@ footer a { color: var(--pink); text-decoration: none; }
   <footer>
     <p>
       InstaDown — Instagram Media Downloader<br>
-      APIs: <a href="https://t.me/phychokillers" target="_blank">PSYCHO OFFICIAL</a> + <a href="https://t.me/lnstaVid_dBot" target="_blank">lnstaVid_dBot</a><br>
+      APIs: <a href="https://insta.bdbots.org" target="_blank">bdbots.org</a> + <a href="https://psycho.instadown.workers.dev" target="_blank">psycho workers</a><br>
       <span style="color:#2a2a40">Tagged: DownloadedByTG@phychokillers · Personal use only</span>
     </p>
   </footer>
