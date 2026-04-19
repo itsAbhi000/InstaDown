@@ -175,6 +175,34 @@ h1 {
   background: var(--s1); border: 1px solid var(--border);
   border-radius: 16px; padding: 18px 22px; margin-bottom: 24px;
 }
+.cap-branding {
+  display: flex; flex-direction: column; gap: 6px;
+}
+.brand-tag, .brand-powered {
+  font-size: 13px; font-family: var(--mono);
+  display: flex; align-items: center; gap: 6px;
+}
+.brand-tag {
+  color: var(--muted2);
+}
+.brand-tag strong {
+  color: var(--pink); font-weight: 600;
+  background: rgba(255,60,172,.1);
+  border: 1px solid rgba(255,60,172,.2);
+  border-radius: 6px; padding: 1px 8px;
+}
+.brand-powered {
+  color: var(--muted2);
+}
+.brand-powered strong {
+  color: var(--cyan); font-weight: 600;
+  background: rgba(0,212,255,.08);
+  border: 1px solid rgba(0,212,255,.2);
+  border-radius: 6px; padding: 1px 8px;
+}
+.cap-divider {
+  height: 1px; background: var(--border); margin: 12px 0;
+}
 .cap-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 9px; }
 .cap-label {
   font-size: 10px; font-family: var(--mono);
@@ -446,7 +474,7 @@ footer a { color: var(--pink); text-decoration: none; }
     <p>
       InstaDown — Instagram Media Downloader<br>
       APIs: <a href="https://t.me/phychokillers" target="_blank">PSYCHO OFFICIAL</a> + <a href="https://t.me/lnstaVid_dBot" target="_blank">lnstaVid_dBot</a><br>
-      <span style="color:#2a2a40">Tagged: DownloadedByTG@phychokillers · Personal use only</span>
+      <span style="color:#2a2a40">Devloped by <a href="https://t.me/its_abhi000" target="_blank" style="color:#2a2a40; text-decoration:none;">Abhi Raj</a> · Personal use only</span>
     </p>
   </footer>
 </div>
@@ -495,17 +523,21 @@ async function fetchMedia() {
 
     allMedia = data.media || [];
 
-    // Caption
-    if (data.caption) {
-      const long = data.caption.length > 160;
+    // Caption box — always shown with custom branding
+    {
+      const captionHtml = data.caption ? escHtml(data.caption) : "";
+      const long = data.caption && data.caption.length > 160;
       capArea.innerHTML = `
         <div class="caption-box">
-          <div class="cap-meta">
-            <span class="cap-label">Caption</span>
-            ${data.username ? `<span class="cap-user">@${data.username}</span>` : ""}
+          <div class="cap-branding">
+            <span class="brand-tag">⬇ Downloaded with <strong>@phychokillers</strong></span>
+            <span class="brand-powered">⚡ Powered by <strong>@lnstaVid_dBot</strong></span>
           </div>
-          <div class="cap-text" id="cap-text">${escHtml(data.caption)}</div>
+          ${captionHtml ? `
+          <div class="cap-divider"></div>
+          <div class="cap-text" id="cap-text">${captionHtml}</div>
           ${long ? `<button class="cap-toggle" id="cap-tog">Show more ▾</button>` : ""}
+          ` : ""}
         </div>`;
       if (long) {
         document.getElementById("cap-tog").addEventListener("click", function() {
