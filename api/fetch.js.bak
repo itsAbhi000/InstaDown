@@ -22,8 +22,8 @@ function makeTimestamp(index) {
 
 function makeFilename(type, index) {
   const ts = makeTimestamp(index);
-  if (type === "video") return `${index}VID_${ts}_${TAG}.mp4`;
-  return `${index}IMG_${ts}_${TAG}.jpg`;
+  if (type === "video") return `video_${index}VID_${ts}_${TAG}.mp4`;
+  return `image_${index}IMG_${ts}_${TAG}.jpg`;
 }
 
 function cleanUrl(url) {
