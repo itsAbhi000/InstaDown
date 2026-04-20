@@ -7,6 +7,25 @@ const TAG          = "DownloadedByTG@phychokillers";
 const API_PRIMARY  = "https://insta.bdbots.org/dl";
 const API_FALLBACK = "https://psycho.instadown.workers.dev/";
 
+// Generates timestamp like VID_20260420_144040_001
+function makeTimestamp(index) {
+  const now = new Date();
+  const YYYY = now.getFullYear();
+  const MM   = String(now.getMonth() + 1).padStart(2, "0");
+  const DD   = String(now.getDate()).padStart(2, "0");
+  const hh   = String(now.getHours()).padStart(2, "0");
+  const mm   = String(now.getMinutes()).padStart(2, "0");
+  const ss   = String(now.getSeconds()).padStart(2, "0");
+  const idx  = String(index).padStart(3, "0");
+  return `${YYYY}${MM}${DD}_${hh}${mm}${ss}_${idx}`;
+}
+
+function makeFilename(type, index) {
+  const ts = makeTimestamp(index);
+  if (type === "video") return `video_${index}VID_${ts}_${TAG}.mp4`;
+  return `image_${index}IMG_${ts}_${TAG}.jpg`;
+}
+
 function cleanUrl(url) {
   return url.split("?")[0].replace(/\/$/, "");
 }
@@ -26,9 +45,7 @@ function normalisePrimary(data) {
       type     : m.type === "video" ? "video" : "photo",
       url      : m.url,
       thumb    : m.thumb || m.url,
-      filename : m.type === "video"
-                   ? `video_${i + 1}_${TAG}.mp4`
-                   : `image_${i + 1}_${TAG}.jpg`
+      filename : makeFilename(m.type === "video" ? "video" : "photo", i + 1)
     }))
   };
 }
@@ -46,9 +63,7 @@ function normaliseFallback(result) {
         type     : isVideo ? "video" : "photo",
         url      : isVideo ? (m.video_url || m.image_url) : m.image_url,
         thumb    : m.video_img || m.image_url,
-        filename : isVideo
-                     ? `video_${i + 1}_${TAG}.mp4`
-                     : `image_${i + 1}_${TAG}.jpg`
+        filename : makeFilename(isVideo ? "video" : "photo", i + 1)
       };
     })
   };
