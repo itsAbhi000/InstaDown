@@ -1,0 +1,37 @@
+{
+  "name": "InstaDown",
+  "short_name": "InstaDown",
+  "description": "Download Instagram photos, videos, reels and stories instantly.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#060609",
+  "theme_color": "#060609",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["utilities", "productivity"],
+  "icons": [
+    {
+      "src": "/icon/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Download Media",
+      "short_name": "Download",
+      "description": "Paste an Instagram link and download",
+      "url": "/",
+      "icons": [{ "src": "/icon/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

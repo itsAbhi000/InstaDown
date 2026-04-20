@@ -1,18 +1,32 @@
 {
   "version": 2,
   "builds": [
-    {
-      "src": "api/*.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "public/**",
-      "use": "@vercel/static"
-    }
+    { "src": "api/*.js",  "use": "@vercel/node"   },
+    { "src": "public/**", "use": "@vercel/static"  }
   ],
   "routes": [
     { "src": "/api/fetch",    "dest": "/api/fetch.js"    },
     { "src": "/api/download", "dest": "/api/download.js" },
-    { "src": "/(.*)",         "dest": "/public/$1"       }
+    {
+      "src": "/sw.js",
+      "dest": "/public/sw.js",
+      "headers": {
+        "Service-Worker-Allowed": "/",
+        "Cache-Control": "no-cache"
+      }
+    },
+    {
+      "src": "/manifest.json",
+      "dest": "/public/manifest.json",
+      "headers": {
+        "Content-Type": "application/manifest+json",
+        "Cache-Control": "no-cache"
+      }
+    },
+    {
+      "src": "/icon/(.*)",
+      "dest": "/public/icon/$1"
+    },
+    { "src": "/(.*)", "dest": "/public/$1" }
   ]
 }
